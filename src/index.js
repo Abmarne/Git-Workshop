@@ -80,7 +80,9 @@ function positionTooltip(x, y, isDetailed = false, nodeRadius = 8) {
 // =============================================================================
 
 // Load contributor data from data.json
-d3.json("../data.json", function (error, data) {
+// Cache busting: append timestamp to bypass browser/CDN caching
+const cacheBuster = new Date().getTime();
+d3.json(`../data.json?v=${cacheBuster}`, function (error, data) {
     if (error) {
         console.error("Error loading data:", error);
         alert("Error loading data.json. Please make sure the file exists.");
